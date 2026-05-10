@@ -60,9 +60,16 @@ function TimeBlock({ value, label }: { value: number; label: string }) {
 }
 
 export default function WeddingCountdownSection() {
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => getTimeLeft());
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+    done: false,
+  });
 
   useEffect(() => {
+    setTimeLeft(getTimeLeft());
     const timer = setInterval(() => {
       setTimeLeft(getTimeLeft());
     }, 1000);
@@ -221,6 +228,7 @@ export default function WeddingCountdownSection() {
                 </a>
               </div>
             </div>
+
           </div>
         </div>
       </RevealItem>

@@ -53,6 +53,26 @@ export default function Home() {
       window.removeEventListener("wedding-content-reveal", handleContentReveal);
   }, []);
 
+  useEffect(() => {
+    if (!showMusicPrompt) return;
+
+    const html = document.documentElement;
+    const body = document.body;
+    const prevHtmlOverflow = html.style.overflow;
+    const prevBodyOverflow = body.style.overflow;
+    const prevBodyOverscroll = body.style.overscrollBehavior;
+
+    html.style.overflow = "hidden";
+    body.style.overflow = "hidden";
+    body.style.overscrollBehavior = "none";
+
+    return () => {
+      html.style.overflow = prevHtmlOverflow;
+      body.style.overflow = prevBodyOverflow;
+      body.style.overscrollBehavior = prevBodyOverscroll;
+    };
+  }, [showMusicPrompt]);
+
   function handleStartMusic() {
     setShowMusicPrompt(false);
     if (audioRef.current) {
@@ -524,7 +544,7 @@ export default function Home() {
           </div>
 
           {/* Centre flower */}
-          <div className="pointer-events-none absolute bottom-0 left-1/2 z-10 w-[35%] -translate-x-1/2 translate-y-[36%] opacity-75 max-[360px]:w-[32%] max-[360px]:translate-y-[31%] md:w-[44%] md:translate-y-[54%]">
+          <div className="pointer-events-none absolute bottom-0 left-1/2 z-10 w-[35%] -translate-x-1/2 translate-y-[36%] opacity-75 max-[360px]:w-[42%] max-[360px]:translate-y-[31%] md:w-[44%] md:translate-y-[54%]">
             <FloralLottie
               className="w-full origin-bottom scale-[1.15] max-[360px]:scale-[1.08] md:scale-[1.5]"
               startOnView
@@ -534,7 +554,7 @@ export default function Home() {
             />
           </div>
           {/* Left flower */}
-          <div className="pointer-events-none absolute bottom-0 left-1/2 z-10 w-[28%] -translate-x-[122%] translate-y-[36%] opacity-75 max-[360px]:w-[25%] max-[360px]:-translate-x-[115%] max-[360px]:translate-y-[31%] md:w-[34%] md:-translate-x-[160%] md:translate-y-[54%]">
+          <div className="pointer-events-none absolute bottom-0 left-1/2 z-10 w-[28%] -translate-x-[122%] translate-y-[36%] opacity-75 max-[360px]:w-[31%] max-[360px]:-translate-x-[122%] max-[360px]:translate-y-[31%] md:w-[34%] md:-translate-x-[160%] md:translate-y-[54%]">
             <FloralLottie
               className="w-full origin-bottom scale-[1.06] -scale-x-100 max-[360px]:scale-[0.99] md:scale-[1.35]"
               startOnView
@@ -544,7 +564,7 @@ export default function Home() {
             />
           </div>
           {/* Right flower */}
-          <div className="pointer-events-none absolute bottom-0 left-1/2 z-10 w-[28%] translate-x-[23%] translate-y-[36%] opacity-75 max-[360px]:w-[25%] max-[360px]:translate-x-[18%] max-[360px]:translate-y-[31%] md:w-[34%] md:translate-x-[60%] md:translate-y-[54%]">
+          <div className="pointer-events-none absolute bottom-0 left-1/2 z-10 w-[28%] translate-x-[23%] translate-y-[36%] opacity-75 max-[360px]:w-[31%] max-[360px]:translate-x-[19%] max-[360px]:translate-y-[31%] md:w-[34%] md:translate-x-[60%] md:translate-y-[54%]">
             <FloralLottie
               className="w-full origin-bottom scale-[1.06] max-[360px]:scale-[0.99] md:scale-[1.35]"
               startOnView
