@@ -16,3 +16,59 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans), Arial, sans-serif;
 }
+
+/* ── Wedding Particle Effects ── */
+@keyframes weddingParticleFloatRight {
+  0% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.65;
+  }
+  80% {
+    opacity: 0.65;
+  }
+  100% {
+    transform: translateY(-90px) translateX(14px);
+    opacity: 0;
+  }
+}
+
+@keyframes weddingParticleFloatLeft {
+  0% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.65;
+  }
+  80% {
+    opacity: 0.65;
+  }
+  100% {
+    transform: translateY(-90px) translateX(-14px);
+    opacity: 0;
+  }
+}
+
+.wedding-particle-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.wedding-particle {
+  position: absolute;
+  left: var(--p-x, 50%);
+  top: var(--p-y, 50%);
+  width: var(--p-size, 5px);
+  height: var(--p-size, 5px);
+  border-radius: 50%;
+  background: var(--p-color, rgba(255, 255, 255, 0.8));
+  opacity: 0;
+  animation: var(--p-anim, weddingParticleFloatRight) var(--p-dur, 6s)
+    var(--p-delay, 0s) infinite ease-in-out;
+}

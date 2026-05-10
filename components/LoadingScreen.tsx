@@ -48,9 +48,6 @@ export default function LoadingScreen() {
 
   // Track when the page is actually ready
   useEffect(() => {
-    const isVeryNarrow = window.matchMedia("(max-width: 360px)").matches;
-    minTimeRef.current = Date.now() + (isVeryNarrow ? 4300 : 4800);
-
     function markReady() {
       pageReadyRef.current = true;
     }
@@ -123,6 +120,9 @@ export default function LoadingScreen() {
   // Sequence: entrance → trace → fill → spinner → dismiss when page ready
   useEffect(() => {
     if (!pathInfo) return;
+
+    const isVeryNarrow = window.matchMedia("(max-width: 360px)").matches;
+    minTimeRef.current = Date.now() + (isVeryNarrow ? 4300 : 4800);
 
     // Scale-in entrance
     const tEnter = requestAnimationFrame(() =>

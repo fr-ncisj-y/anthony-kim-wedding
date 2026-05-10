@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import LoadingScreen from "@/components/LoadingScreen";
 import FloralLottie from "@/components/FloralLottie";
 import KenBurnsHeroImage from "@/components/KenBurnsHeroImage";
@@ -27,10 +27,56 @@ export default function Home() {
   const section1Ref = useRef<HTMLElement>(null);
   const section2Ref = useRef<HTMLElement>(null);
   const flowers2SentinelRef = useRef<HTMLDivElement>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [showMusicPrompt, setShowMusicPrompt] = useState(false);
+
+  useEffect(() => {
+    const audio = new Audio("/bga.mp3");
+    audio.loop = true;
+    audio.volume = 0.5;
+    audio.preload = "auto";
+    audioRef.current = audio;
+
+    return () => {
+      audio.pause();
+      audio.src = "";
+    };
+  }, []);
+
+  useEffect(() => {
+    function handleContentReveal() {
+      setShowMusicPrompt(true);
+    }
+
+    window.addEventListener("wedding-content-reveal", handleContentReveal);
+    return () =>
+      window.removeEventListener("wedding-content-reveal", handleContentReveal);
+  }, []);
+
+  function handleStartMusic() {
+    setShowMusicPrompt(false);
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+      audioRef.current.play().catch(() => {});
+    }
+  }
 
   return (
     <>
       <LoadingScreen />
+
+      {showMusicPrompt && (
+        <button
+          type="button"
+          onClick={handleStartMusic}
+          className="fixed inset-0 z-[60] flex items-end justify-center bg-[rgba(122,158,179,0.14)] px-4 pb-14 backdrop-blur-[2px]"
+          aria-label="Tap to begin music"
+        >
+          <span className="rounded-full border border-[rgba(245,240,235,0.35)] bg-[rgba(245,240,235,0.12)] px-5 py-2 font-[family-name:var(--font-cormorant)] text-[13px] uppercase tracking-[0.28em] text-[#F5F0EB] shadow-[0_10px_30px_rgba(45,60,72,0.14)]">
+            tap to begin
+          </span>
+        </button>
+      )}
 
       <main className="flex min-h-svh flex-col items-center bg-neutral-300">
         <section
@@ -42,6 +88,128 @@ export default function Home() {
           md:shadow-2xl
         "
         >
+          {/* ── PARTICLES ── */}
+          <div className="wedding-particle-layer" aria-hidden="true">
+            {(
+              [
+                {
+                  x: "8%",
+                  y: "15%",
+                  size: "5px",
+                  color: "rgba(255,255,255,0.75)",
+                  dur: "8s",
+                  delay: "0s",
+                  anim: "weddingParticleFloatRight",
+                },
+                {
+                  x: "25%",
+                  y: "55%",
+                  size: "6px",
+                  color: "rgba(255,255,255,0.70)",
+                  dur: "6s",
+                  delay: "1.2s",
+                  anim: "weddingParticleFloatLeft",
+                },
+                {
+                  x: "42%",
+                  y: "30%",
+                  size: "5px",
+                  color: "rgba(255,255,255,0.65)",
+                  dur: "9s",
+                  delay: "2.5s",
+                  anim: "weddingParticleFloatRight",
+                },
+                {
+                  x: "60%",
+                  y: "70%",
+                  size: "7px",
+                  color: "rgba(255,255,255,0.60)",
+                  dur: "7s",
+                  delay: "0.8s",
+                  anim: "weddingParticleFloatLeft",
+                },
+                {
+                  x: "78%",
+                  y: "20%",
+                  size: "5px",
+                  color: "rgba(255,255,255,0.70)",
+                  dur: "10s",
+                  delay: "3s",
+                  anim: "weddingParticleFloatRight",
+                },
+                {
+                  x: "90%",
+                  y: "45%",
+                  size: "6px",
+                  color: "rgba(255,255,255,0.65)",
+                  dur: "7.5s",
+                  delay: "1.5s",
+                  anim: "weddingParticleFloatLeft",
+                },
+                {
+                  x: "15%",
+                  y: "80%",
+                  size: "5px",
+                  color: "rgba(255,255,255,0.70)",
+                  dur: "8.5s",
+                  delay: "4s",
+                  anim: "weddingParticleFloatRight",
+                },
+                {
+                  x: "55%",
+                  y: "10%",
+                  size: "6px",
+                  color: "rgba(255,255,255,0.75)",
+                  dur: "6.5s",
+                  delay: "2s",
+                  anim: "weddingParticleFloatLeft",
+                },
+                {
+                  x: "35%",
+                  y: "60%",
+                  size: "5px",
+                  color: "rgba(255,255,255,0.65)",
+                  dur: "9.5s",
+                  delay: "0.4s",
+                  anim: "weddingParticleFloatRight",
+                },
+                {
+                  x: "70%",
+                  y: "85%",
+                  size: "6px",
+                  color: "rgba(255,255,255,0.70)",
+                  dur: "7s",
+                  delay: "3.5s",
+                  anim: "weddingParticleFloatLeft",
+                },
+              ] as Array<{
+                x: string;
+                y: string;
+                size: string;
+                color: string;
+                dur: string;
+                delay: string;
+                anim: string;
+              }>
+            ).map((p, i) => (
+              <div
+                key={i}
+                className="wedding-particle"
+                style={
+                  {
+                    "--p-x": p.x,
+                    "--p-y": p.y,
+                    "--p-size": p.size,
+                    "--p-color": p.color,
+                    "--p-dur": p.dur,
+                    "--p-delay": p.delay,
+                    "--p-anim": p.anim,
+                  } as React.CSSProperties
+                }
+              />
+            ))}
+          </div>
+
           {/* ── HERO PHOTO ── */}
           <div
             className="relative w-full"
@@ -164,6 +332,110 @@ export default function Home() {
           md:shadow-2xl
         "
         >
+          {/* ── PARTICLES ── */}
+          <div className="wedding-particle-layer" aria-hidden="true">
+            {(
+              [
+                {
+                  x: "10%",
+                  y: "20%",
+                  size: "5px",
+                  color: "rgba(196,168,136,0.80)",
+                  dur: "9s",
+                  delay: "0.5s",
+                  anim: "weddingParticleFloatRight",
+                },
+                {
+                  x: "30%",
+                  y: "50%",
+                  size: "6px",
+                  color: "rgba(180,150,110,0.75)",
+                  dur: "7s",
+                  delay: "2s",
+                  anim: "weddingParticleFloatLeft",
+                },
+                {
+                  x: "55%",
+                  y: "25%",
+                  size: "5px",
+                  color: "rgba(196,168,136,0.70)",
+                  dur: "8.5s",
+                  delay: "1s",
+                  anim: "weddingParticleFloatRight",
+                },
+                {
+                  x: "75%",
+                  y: "65%",
+                  size: "6px",
+                  color: "rgba(180,150,110,0.75)",
+                  dur: "6.5s",
+                  delay: "3s",
+                  anim: "weddingParticleFloatLeft",
+                },
+                {
+                  x: "20%",
+                  y: "75%",
+                  size: "5px",
+                  color: "rgba(196,168,136,0.70)",
+                  dur: "10s",
+                  delay: "4s",
+                  anim: "weddingParticleFloatRight",
+                },
+                {
+                  x: "85%",
+                  y: "35%",
+                  size: "6px",
+                  color: "rgba(180,150,110,0.80)",
+                  dur: "7.5s",
+                  delay: "1.5s",
+                  anim: "weddingParticleFloatLeft",
+                },
+                {
+                  x: "45%",
+                  y: "80%",
+                  size: "5px",
+                  color: "rgba(196,168,136,0.70)",
+                  dur: "8s",
+                  delay: "0.8s",
+                  anim: "weddingParticleFloatRight",
+                },
+                {
+                  x: "65%",
+                  y: "15%",
+                  size: "6px",
+                  color: "rgba(180,150,110,0.75)",
+                  dur: "6s",
+                  delay: "2.5s",
+                  anim: "weddingParticleFloatLeft",
+                },
+              ] as Array<{
+                x: string;
+                y: string;
+                size: string;
+                color: string;
+                dur: string;
+                delay: string;
+                anim: string;
+              }>
+            ).map((p, i) => (
+              <div
+                key={i}
+                className="wedding-particle"
+                style={
+                  {
+                    "--p-x": p.x,
+                    "--p-y": p.y,
+                    "--p-size": p.size,
+                    "--p-color": p.color,
+                    "--p-dur": p.dur,
+                    "--p-delay": p.delay,
+                    "--p-anim": p.anim,
+                  } as React.CSSProperties
+                }
+              />
+            ))}
+          </div>
+
           <div className="relative z-20 -mt-3 flex w-full max-w-[326px] flex-col gap-4 py-8 text-left md:-mt-24 md:gap-5">
             <RevealItem delay={1600}>
               <p className="font-[family-name:var(--font-cormorant)] text-[11px] uppercase tracking-[0.22em] text-[#9AAABB]">

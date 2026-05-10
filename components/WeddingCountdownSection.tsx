@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import RevealItem from "@/components/RevealItem";
 
 type TimeLeft = {
@@ -80,6 +80,32 @@ export default function WeddingCountdownSection() {
       md:shadow-2xl
     "
     >
+      {/* ── PARTICLES ── */}
+      <div className="wedding-particle-layer" aria-hidden="true">
+        {(
+          [
+            { x: '12%', y: '18%', size: '5px', color: 'rgba(255,255,255,0.75)', dur: '8s',   delay: '0.6s', anim: 'weddingParticleFloatRight' },
+            { x: '35%', y: '45%', size: '6px', color: 'rgba(220,235,245,0.80)', dur: '7s',   delay: '2s',   anim: 'weddingParticleFloatLeft'  },
+            { x: '58%', y: '28%', size: '5px', color: 'rgba(255,255,255,0.70)', dur: '9.5s', delay: '1s',   anim: 'weddingParticleFloatRight' },
+            { x: '80%', y: '60%', size: '6px', color: 'rgba(220,235,245,0.75)', dur: '6.5s', delay: '3s',   anim: 'weddingParticleFloatLeft'  },
+            { x: '22%', y: '72%', size: '5px', color: 'rgba(255,255,255,0.70)', dur: '10s',  delay: '4s',   anim: 'weddingParticleFloatRight' },
+            { x: '90%', y: '30%', size: '6px', color: 'rgba(220,235,245,0.80)', dur: '7.5s', delay: '1.5s', anim: 'weddingParticleFloatLeft'  },
+            { x: '48%', y: '82%', size: '5px', color: 'rgba(255,255,255,0.70)', dur: '8.5s', delay: '0.3s', anim: 'weddingParticleFloatRight' },
+            { x: '68%', y: '12%', size: '6px', color: 'rgba(220,235,245,0.75)', dur: '6s',   delay: '2.8s', anim: 'weddingParticleFloatLeft'  },
+          ] as Array<{ x: string; y: string; size: string; color: string; dur: string; delay: string; anim: string }>
+        ).map((p, i) => (
+          <div
+            key={i}
+            className="wedding-particle"
+            style={{
+              '--p-x': p.x, '--p-y': p.y, '--p-size': p.size,
+              '--p-color': p.color, '--p-dur': p.dur, '--p-delay': p.delay,
+              '--p-anim': p.anim,
+            } as React.CSSProperties}
+          />
+        ))}
+      </div>
+
       <RevealItem delay={1200}>
         <p className="font-[family-name:var(--font-cormorant)] text-[11px] uppercase tracking-[0.22em] text-[#E9F0F5]">
           Event Details
@@ -116,61 +142,85 @@ export default function WeddingCountdownSection() {
       </RevealItem>
 
       <RevealItem delay={1950}>
-        <div className="mt-7 grid w-full max-w-[340px] grid-cols-1 gap-3 text-left">
-          <div className="rounded-2xl border border-[#B4C6D6] bg-[#EDF3F8] p-3.5 max-[360px]:p-3 sm:p-4">
-            <p className="font-[family-name:var(--font-cormorant)] text-[11px] uppercase tracking-[0.2em] text-[#6D8394]">
-              Church Ceremony
+        <div className="mt-7 w-full max-w-[340px] overflow-hidden rounded-[1.75rem] border border-[#B4C6D6] bg-[#EDF3F8] text-left shadow-[0_18px_40px_rgba(47,71,90,0.08)]">
+          <div className="px-4 pt-4 pb-3 sm:px-5 sm:pt-5">
+            <p className="font-[family-name:var(--font-cormorant)] text-[11px] uppercase tracking-[0.24em] text-[#6D8394]">
+              Event Details
             </p>
-            <p className="mt-1 max-w-[22ch] font-[family-name:var(--font-cormorant)] text-[1.14rem] font-medium leading-tight text-[#2F475A] max-[360px]:text-[1.02rem] sm:text-xl">
-              {CHURCH_NAME}
-            </p>
-            <p className="mt-1 font-[family-name:var(--font-cormorant)] text-sm leading-relaxed text-[#546A7B]">
-              {CHURCH_ADDRESS}
-            </p>
+            <h3 className="mt-1 max-w-[15ch] font-[family-name:var(--font-cormorant)] text-[1.42rem] italic leading-[0.96] text-[#2F475A] max-[360px]:text-[1.28rem] sm:text-[1.58rem]">
+              Ceremony, reception, and route
+            </h3>
           </div>
 
-          <div className="rounded-2xl border border-[#B4C6D6] bg-[#EDF3F8] p-3.5 max-[360px]:p-3 sm:p-4">
-            <p className="font-[family-name:var(--font-cormorant)] text-[11px] uppercase tracking-[0.2em] text-[#6D8394]">
-              Reception Venue
-            </p>
-            <p className="mt-1 max-w-[22ch] font-[family-name:var(--font-cormorant)] text-[1.14rem] font-medium leading-tight text-[#2F475A] max-[360px]:text-[1.02rem] sm:text-xl">
-              {RECEPTION_NAME}
-            </p>
-            <p className="mt-1 font-[family-name:var(--font-cormorant)] text-sm leading-relaxed text-[#546A7B]">
-              {RECEPTION_ADDRESS}
-            </p>
-          </div>
-        </div>
-      </RevealItem>
+          <div className="px-4 pb-4 sm:px-5 sm:pb-5">
+            <div className="flex items-center gap-3 border-t border-[#D3DEE8] pt-3.5 text-[#6D8394]">
+              <span className="font-[family-name:var(--font-cormorant)] text-[10px] uppercase tracking-[0.24em]">
+                From altar
+              </span>
+              <span className="h-px flex-1 bg-[#C7D5E0]" />
+              <span className="font-[family-name:var(--font-cormorant)] text-[10px] uppercase tracking-[0.24em]">
+                To celebration
+              </span>
+            </div>
 
-      <RevealItem delay={2100}>
-        <div className="mt-4 w-full max-w-[340px] overflow-hidden rounded-2xl border border-[#B4C6D6] bg-[#EDF3F8]">
-          <div className="border-b border-[#C7D5E0] px-4 py-3 text-left">
-            <p className="font-[family-name:var(--font-cormorant)] text-[11px] uppercase tracking-[0.2em] text-[#6D8394]">
-              Route Map
-            </p>
-            <p className="font-[family-name:var(--font-cormorant)] text-sm text-[#546A7B]">
-              From church to reception
-            </p>
-          </div>
-          <div className="relative w-full overflow-hidden pb-[68%] sm:pb-[62%]">
-            <iframe
-              title="Route from church to reception"
-              src={MAP_EMBED_URL}
-              className="absolute inset-0 h-full w-full"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
-          <div className="px-4 py-3 text-center">
-            <a
-              href={DIRECTIONS_URL}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex min-h-10 items-center rounded-full border border-[#9AB1C3] bg-[#F2F7FB] px-3.5 py-2 font-[family-name:var(--font-cormorant)] text-[0.82rem] tracking-wide text-[#2F475A] transition hover:bg-[#DEEAF3] max-[360px]:px-3 max-[360px]:text-[0.76rem] sm:px-4 sm:text-sm"
-            >
-              Open Navigation
-            </a>
+            <div className="mt-4 grid gap-3 text-left sm:grid-cols-12">
+              <div className="rounded-[1.35rem] border border-[#C2D1DD] bg-[#F5F9FC] p-4 sm:col-span-7 sm:p-4.5">
+                <p className="font-[family-name:var(--font-cormorant)] text-[11px] uppercase tracking-[0.22em] text-[#6D8394]">
+                  Church Ceremony
+                </p>
+                <p className="mt-1 max-w-[20ch] font-[family-name:var(--font-cormorant)] text-[1.14rem] font-medium leading-tight text-[#2F475A] max-[360px]:text-[1.02rem] sm:text-[1.22rem]">
+                  {CHURCH_NAME}
+                </p>
+                <p className="mt-1.5 font-[family-name:var(--font-cormorant)] text-sm leading-relaxed text-[#546A7B]">
+                  {CHURCH_ADDRESS}
+                </p>
+              </div>
+
+              <div className="rounded-[1.35rem] border border-[#C2D1DD] bg-[#F0F5F9] p-4 sm:col-span-5 sm:self-end sm:p-4">
+                <p className="font-[family-name:var(--font-cormorant)] text-[11px] uppercase tracking-[0.22em] text-[#7A8E9D]">
+                  Reception
+                </p>
+                <p className="mt-1 max-w-[18ch] font-[family-name:var(--font-cormorant)] text-[1.02rem] italic leading-tight text-[#2F475A] sm:text-[1.08rem]">
+                  {RECEPTION_NAME}
+                </p>
+                <p className="mt-1.5 font-[family-name:var(--font-cormorant)] text-sm leading-relaxed text-[#546A7B]">
+                  {RECEPTION_ADDRESS}
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-3 overflow-hidden rounded-[1.35rem] border border-[#C2D1DD] bg-[#F8FBFD]">
+              <div className="border-b border-[#D4E0E9] px-4 py-3 sm:px-4.5">
+                <p className="font-[family-name:var(--font-cormorant)] text-[11px] uppercase tracking-[0.22em] text-[#6D8394]">
+                  Route Map
+                </p>
+                <p className="font-[family-name:var(--font-cormorant)] text-sm text-[#546A7B]">
+                  Follow the path from church to reception
+                </p>
+              </div>
+              <div className="relative w-full overflow-hidden pb-[60%] sm:pb-[52%]">
+                <iframe
+                  title="Route from church to reception"
+                  src={MAP_EMBED_URL}
+                  className="absolute inset-0 h-full w-full"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+              <div className="flex items-center justify-between gap-3 border-t border-[#D4E0E9] px-4 py-3 sm:px-4.5">
+                <p className="font-[family-name:var(--font-cormorant)] text-[0.82rem] text-[#6B8192] max-[360px]:text-[0.76rem]">
+                  Ceremony first, reception after.
+                </p>
+                <a
+                  href={DIRECTIONS_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex min-h-10 items-center rounded-full border border-[#9AB1C3] bg-[#F2F7FB] px-3.5 py-2 font-[family-name:var(--font-cormorant)] text-[0.82rem] tracking-wide text-[#2F475A] transition hover:bg-[#DEEAF3] max-[360px]:px-3 max-[360px]:text-[0.76rem] sm:px-4 sm:text-sm"
+                >
+                  Open Navigation
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </RevealItem>
