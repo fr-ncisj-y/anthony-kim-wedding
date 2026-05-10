@@ -124,13 +124,16 @@ export default function LoadingScreen() {
         clearInterval(tPoll);
         window.dispatchEvent(new Event("wedding-floral-start"));
         const isVeryNarrow = window.matchMedia("(max-width: 360px)").matches;
-        setTimeout(() => {
-          setFading(true);
-          setTimeout(() => {
-            setGone(true);
-            window.dispatchEvent(new Event("wedding-content-reveal"));
-          }, 900);
-        }, isVeryNarrow ? 140 : 220);
+        setTimeout(
+          () => {
+            setFading(true);
+            setTimeout(() => {
+              setGone(true);
+              window.dispatchEvent(new Event("wedding-content-reveal"));
+            }, 900);
+          },
+          isVeryNarrow ? 140 : 220,
+        );
       }
     }, 120);
 
