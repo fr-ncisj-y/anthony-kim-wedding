@@ -36,16 +36,16 @@ export default function Home() {
         <section
           ref={section1Ref}
           className="
-          relative flex h-dvh w-full flex-col items-center
+          relative flex min-h-dvh w-full flex-col items-center
           overflow-hidden border border-[#C8B9A8] bg-[#9AAABB]
-          md:h-[844px] md:w-[390px]
+          px-3 pb-8 max-[360px]:px-2.5 sm:px-4 md:h-[844px] md:w-[390px] md:px-0 md:pb-0
           md:shadow-2xl
         "
         >
           {/* ── HERO PHOTO ── */}
           <div
             className="relative w-full"
-            style={{ height: "45dvh", minHeight: "240px" }}
+            style={{ height: "45dvh", minHeight: "212px" }}
           >
             <KenBurnsHeroImage
               src="/images/prenup.jpeg"
@@ -67,26 +67,26 @@ export default function Home() {
           </div>
 
           {/* ── INVITATION COPY ── */}
-          <div className="relative z-20 -mt-8 flex flex-1 flex-col items-center gap-5 px-8 pt-8 pb-10 text-center">
+          <div className="relative z-20 -mt-6 flex flex-1 flex-col items-center gap-4 px-3 pt-8 pb-12 text-center max-[360px]:px-2.5 sm:px-8 md:-mt-8 md:gap-5 md:pb-10">
             {/* Names — overlap photo from below */}
-            <div className="relative z-30 -mt-[7rem] flex flex-col items-center leading-none">
+            <div className="relative z-30 -mt-[5.1rem] flex flex-col items-center leading-none max-[360px]:-mt-[4.7rem] md:-mt-[7rem]">
               <RevealItem delay={200}>
                 <span
-                  className={`${script.className} text-[86px] text-[#F5F0EB]`}
+                  className={`${script.className} text-[clamp(3.25rem,15.4vw,5.35rem)] max-[360px]:text-[3rem] text-[#F5F0EB]`}
                 >
                   Anthony
                 </span>
               </RevealItem>
               <RevealItem delay={350}>
                 <span
-                  className={`${script.className} relative -top-3 text-[48px] text-[#DCE6EE]`}
+                  className={`${script.className} relative -top-1 text-[clamp(1.9rem,8.8vw,3rem)] max-[360px]:text-[1.72rem] text-[#DCE6EE] md:-top-3`}
                 >
                   and
                 </span>
               </RevealItem>
               <RevealItem delay={500}>
                 <span
-                  className={`${script.className} text-[86px] text-[#F5F0EB]`}
+                  className={`${script.className} text-[clamp(3.25rem,15.4vw,5.35rem)] max-[360px]:text-[3rem] text-[#F5F0EB]`}
                 >
                   Kim
                 </span>
@@ -99,7 +99,7 @@ export default function Home() {
 
             {/* Request line */}
             <RevealItem delay={850}>
-              <p className="font-[family-name:var(--font-cormorant)] text-lg italic text-[#EDF3F8]">
+              <p className="font-[family-name:var(--font-cormorant)] text-[0.98rem] leading-snug italic text-[#EDF3F8] max-[360px]:text-[0.92rem] md:text-lg">
                 request the honour of your presence
                 <br />
                 at the celebration of our marriage
@@ -112,20 +112,20 @@ export default function Home() {
 
             {/* Date & time */}
             <RevealItem delay={1150} className="-mt-1">
-              <p className="font-[family-name:var(--font-cormorant)] text-base italic text-[#F5F0EB]">
+              <p className="font-[family-name:var(--font-cormorant)] text-[0.95rem] italic text-[#F5F0EB] max-[360px]:text-[0.88rem] md:text-base">
                 Saturday, May 28, 2026
               </p>
-              <p className="font-[family-name:var(--font-cormorant)] text-sm tracking-wide text-[#D7E1EA]">
+              <p className="font-[family-name:var(--font-cormorant)] text-[0.82rem] tracking-wide text-[#D7E1EA] max-[360px]:text-[0.77rem] md:text-sm">
                 Nine o'Clock in the Morning
               </p>
             </RevealItem>
 
             {/* Venue */}
             <RevealItem delay={1300} className="-mt-1">
-              <p className="font-[family-name:var(--font-cormorant)] text-lg font-medium tracking-wide text-[#F5F0EB]">
+              <p className="font-[family-name:var(--font-cormorant)] text-[1.03rem] font-medium tracking-wide text-[#F5F0EB] max-[360px]:text-[0.98rem] md:text-lg">
                 Saint Francis Xavier Parish
               </p>
-              <p className="font-[family-name:var(--font-cormorant)] text-sm text-[#D7E1EA]">
+              <p className="font-[family-name:var(--font-cormorant)] text-[0.84rem] text-[#D7E1EA] max-[360px]:text-[0.79rem] md:text-sm">
                 Halawig-gogon, Goa, Camarines Sur
               </p>
             </RevealItem>
@@ -141,9 +141,9 @@ export default function Home() {
             </RevealItem>
           </div>
 
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 w-full translate-y-[42%] opacity-75">
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 w-full translate-y-[36%] opacity-75 md:translate-y-[42%]">
             <FloralLottie
-              className="w-full origin-bottom scale-[1.22]"
+              className="w-full origin-bottom scale-[1.14] md:scale-[1.22]"
               animationData={flower3Animation}
               startEvent="wedding-content-reveal"
             />
@@ -155,24 +155,21 @@ export default function Home() {
           </div> */}
         </section>
 
-        {false && <WeddingCountdownSection />}
-
         <section
           ref={section2Ref}
           className="
-          relative -mt-px flex h-dvh w-full flex-col items-center justify-center
+          relative -mt-px flex min-h-dvh w-full flex-col items-center justify-center
           overflow-hidden border border-t-0 border-[#C8B9A8] bg-[#F5F0EB]
-          px-8 text-center
-          md:h-[844px] md:w-[390px]
+          px-5 py-14 text-center md:h-[844px] md:w-[390px] md:px-8 md:py-0
           md:shadow-2xl
         "
         >
-          <div className="relative z-20 -mt-24 flex w-full max-w-[320px] flex-col gap-5 py-8 text-left">
+          <div className="relative z-20 -mt-3 flex w-full max-w-[326px] flex-col gap-4 py-8 text-left md:-mt-24 md:gap-5">
             <RevealItem delay={1600}>
               <p className="font-[family-name:var(--font-cormorant)] text-[11px] uppercase tracking-[0.22em] text-[#9AAABB]">
                 Our Journey
               </p>
-              <h3 className="mt-1 whitespace-nowrap font-[family-name:var(--font-cormorant)] text-[1.55rem] leading-none text-[#3A5060]">
+              <h3 className="mt-1 font-[family-name:var(--font-cormorant)] text-[clamp(1.45rem,6.3vw,1.9rem)] leading-tight text-[#3A5060]">
                 How We Found Each Other
               </h3>
               <p className="mt-2 font-[family-name:var(--font-cormorant)] text-[15px] leading-relaxed text-[#4A5A66]">
@@ -246,18 +243,18 @@ export default function Home() {
             className="absolute bottom-0 left-0 w-full h-px"
           />
 
-          <div className="pointer-events-none absolute top-0 right-0 z-10 w-[60%] translate-x-[24%] -translate-y-[56%] rotate-[15deg] opacity-80">
+          <div className="pointer-events-none absolute top-0 right-0 z-10 w-[45%] translate-x-[16%] -translate-y-[42%] rotate-[15deg] opacity-80 max-[360px]:w-[41%] max-[360px]:translate-x-[13%] max-[360px]:-translate-y-[38%] md:w-[60%] md:translate-x-[24%] md:-translate-y-[56%]">
             <FloralLottie
-              className="w-full origin-top-right scale-[1.08]"
+              className="w-full origin-top-right scale-[0.95] max-[360px]:scale-[0.9] md:scale-[1.08]"
               startOnView
               triggerRef={section2Ref}
             />
           </div>
 
           {/* Centre flower */}
-          <div className="pointer-events-none absolute bottom-0 left-1/2 z-10 w-[44%] -translate-x-1/2 translate-y-[54%] opacity-75">
+          <div className="pointer-events-none absolute bottom-0 left-1/2 z-10 w-[35%] -translate-x-1/2 translate-y-[36%] opacity-75 max-[360px]:w-[32%] max-[360px]:translate-y-[31%] md:w-[44%] md:translate-y-[54%]">
             <FloralLottie
-              className="w-full origin-bottom scale-[1.5]"
+              className="w-full origin-bottom scale-[1.15] max-[360px]:scale-[1.08] md:scale-[1.5]"
               startOnView
               animationData={flower4Animation}
               loopMode="none"
@@ -265,9 +262,9 @@ export default function Home() {
             />
           </div>
           {/* Left flower */}
-          <div className="pointer-events-none absolute bottom-0 left-1/2 z-10 w-[34%] -translate-x-[160%] translate-y-[54%] opacity-75">
+          <div className="pointer-events-none absolute bottom-0 left-1/2 z-10 w-[28%] -translate-x-[122%] translate-y-[36%] opacity-75 max-[360px]:w-[25%] max-[360px]:-translate-x-[115%] max-[360px]:translate-y-[31%] md:w-[34%] md:-translate-x-[160%] md:translate-y-[54%]">
             <FloralLottie
-              className="w-full origin-bottom scale-[1.35] -scale-x-100"
+              className="w-full origin-bottom scale-[1.06] -scale-x-100 max-[360px]:scale-[0.99] md:scale-[1.35]"
               startOnView
               animationData={flower4Animation}
               loopMode="none"
@@ -275,9 +272,9 @@ export default function Home() {
             />
           </div>
           {/* Right flower */}
-          <div className="pointer-events-none absolute bottom-0 left-1/2 z-10 w-[34%] translate-x-[60%] translate-y-[54%] opacity-75">
+          <div className="pointer-events-none absolute bottom-0 left-1/2 z-10 w-[28%] translate-x-[23%] translate-y-[36%] opacity-75 max-[360px]:w-[25%] max-[360px]:translate-x-[18%] max-[360px]:translate-y-[31%] md:w-[34%] md:translate-x-[60%] md:translate-y-[54%]">
             <FloralLottie
-              className="w-full origin-bottom scale-[1.35]"
+              className="w-full origin-bottom scale-[1.06] max-[360px]:scale-[0.99] md:scale-[1.35]"
               startOnView
               animationData={flower4Animation}
               loopMode="none"
@@ -285,6 +282,8 @@ export default function Home() {
             />
           </div>
         </section>
+
+        <WeddingCountdownSection />
       </main>
     </>
   );

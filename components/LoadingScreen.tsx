@@ -28,7 +28,8 @@ export default function LoadingScreen() {
 
   // Track when the page is actually ready
   useEffect(() => {
-    minTimeRef.current = Date.now() + 4800;
+    const isVeryNarrow = window.matchMedia("(max-width: 360px)").matches;
+    minTimeRef.current = Date.now() + (isVeryNarrow ? 4300 : 4800);
 
     function markReady() {
       pageReadyRef.current = true;
@@ -122,13 +123,14 @@ export default function LoadingScreen() {
       if (pageReadyRef.current && Date.now() >= minTimeRef.current) {
         clearInterval(tPoll);
         window.dispatchEvent(new Event("wedding-floral-start"));
+        const isVeryNarrow = window.matchMedia("(max-width: 360px)").matches;
         setTimeout(() => {
           setFading(true);
           setTimeout(() => {
             setGone(true);
             window.dispatchEvent(new Event("wedding-content-reveal"));
           }, 900);
-        }, 1000);
+        }, isVeryNarrow ? 140 : 220);
       }
     }, 120);
 

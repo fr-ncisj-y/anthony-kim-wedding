@@ -19,17 +19,47 @@ export default function RevealItem({
   style,
 }: Props) {
   const [visible, setVisible] = useState(false);
+  const [isVeryNarrow, setIsVeryNarrow] = useState(false);
 
   useEffect(() => {
-    function handleReveal() {
-      setTimeout(() => setVisible(true), delay);
-    }
-    window.addEventListener("wedding-content-reveal", handleReveal);
-    return () =>
-      window.removeEventListener("wedding-content-reveal", handleReveal);
-  }, [delay]);
+    const media = window.matchMedia("(max-width: 360px)");
+    const update = () => setIsVeryNarrow(media.matches);
+    update();
 
-  const initialY = from === "bottom" ? 24 : from === "top" ? -16 : 0;
+    if (typeof media.addEventListener === "function") {
+      media.addEventListener("change", update);
+      return () => media.removeEventListener("change", update);
+    }
+
+    media.addListener(update);
+    return () => media.removeListener(update);
+  }, []);
+
+  useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
+
+    function handleReveal() {
+      const tunedDelay = isVeryNarrow ? Math.max(0, delay - 140) : delay;
+      timeoutId = setTimeout(() => setVisible(true), tunedDelay);
+    }
+
+    window.addEventListener("wedding-content-reveal", handleReveal);
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+      window.removeEventListener("wedding-content-reveal", handleReveal);
+    };
+  }, [delay, isVeryNarrow]);
+
+  const initialY =
+    from === "bottom"
+      ? isVeryNarrow
+        ? 18
+        : 24
+      : from === "top"
+        ? isVeryNarrow
+          ? -12
+          : -16
+        : 0;
 
   return (
     <motion.div
@@ -37,7 +67,7 @@ export default function RevealItem({
       initial={{ opacity: 0, y: initialY }}
       animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : initialY }}
       transition={{
-        duration: 0.9,
+        duration: isVeryNarrow ? 0.6 : 0.72,
         ease: [0.32, 0.72, 0, 1],
       }}
       style={{

@@ -62,6 +62,7 @@ export default function FloralLottie({
     if (!startOnView) return;
     const target = triggerRef?.current ?? wrapperRef.current;
     if (!target) return;
+    const isVeryNarrow = window.matchMedia("(max-width: 360px)").matches;
 
     let hasPlayed = false;
     const observer = new IntersectionObserver(
@@ -72,7 +73,10 @@ export default function FloralLottie({
         play();
         observer.disconnect();
       },
-      { threshold: 0.25 },
+      {
+        threshold: isVeryNarrow ? 0.18 : 0.25,
+        rootMargin: isVeryNarrow ? "0px 0px -6% 0px" : "0px",
+      },
     );
 
     observer.observe(target);
@@ -85,7 +89,11 @@ export default function FloralLottie({
       className="w-full"
       style={{
         opacity: startOnView && !started ? 0 : 1,
-        transition: started ? "opacity 0.7s ease" : "none",
+        transition: started
+          ? window.matchMedia("(max-width: 360px)").matches
+            ? "opacity 0.56s ease"
+            : "opacity 0.7s ease"
+          : "none",
       }}
     >
       <div className={className}>
