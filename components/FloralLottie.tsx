@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import React from "react";
 import Lottie from "lottie-react";
 import floralAnimation from "@/public/lottie/flowers1.json";
 
@@ -8,56 +9,95 @@ interface Props {
   className?: string;
   startOnView?: boolean;
   animationData?: object;
+  loopMode?: "custom" | "continuous" | "none";
+  triggerRef?: React.RefObject<HTMLElement | HTMLDivElement | null>;
+  startEvent?: string;
 }
 
 export default function FloralLottie({
   className = "",
   startOnView = false,
   animationData = floralAnimation,
+  loopMode = "custom",
+  triggerRef,
+  startEvent = "wedding-floral-start",
 }: Props) {
   const lottieRef = useRef<any>(null);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
+  const startOnViewRef = useRef(startOnView);
+  const [started, setStarted] = useState(false);
 
-  useEffect(() => {
-    function handleStart() {
-      lottieRef.current?.play();
+  const loopStartFrame = Math.max(
+    1,
+    Math.round(((animationData as any)?.fr ?? 60) * 1.6),
+  );
+
+  function handleComplete() {
+    if (loopMode === "custom") {
+      lottieRef.current?.goToAndPlay(loopStartFrame, true);
+    } else if (loopMode === "none") {
+      const totalFrames = (animationData as any)?.op ?? 60;
+      lottieRef.current?.goToAndStop(totalFrames - 1, true);
     }
-    window.addEventListener("wedding-floral-start", handleStart);
-    return () =>
-      window.removeEventListener("wedding-floral-start", handleStart);
-  }, []);
+  }
+
+  function play() {
+    setStarted(true);
+    lottieRef.current?.goToAndPlay(0, true);
+  }
 
   useEffect(() => {
-    if (!startOnView || !wrapperRef.current) return;
+    startOnViewRef.current = startOnView;
+  }, [startOnView]);
+
+  useEffect(() => {
+    // Only use the global event when not driven by scroll — prevents section 2
+    // flowers from firing early when the loading screen dispatches the event.
+    if (startOnViewRef.current) return;
+    window.addEventListener(startEvent, play);
+    return () => window.removeEventListener(startEvent, play);
+  }, [startEvent]);
+
+  useEffect(() => {
+    if (!startOnView) return;
+    const target = triggerRef?.current ?? wrapperRef.current;
+    if (!target) return;
 
     let hasPlayed = false;
     const observer = new IntersectionObserver(
       (entries) => {
         const entry = entries[0];
         if (!entry || hasPlayed || !entry.isIntersecting) return;
-
         hasPlayed = true;
-        lottieRef.current?.play();
+        play();
         observer.disconnect();
       },
-      {
-        threshold: 0.35,
-      },
+      { threshold: 0.25 },
     );
 
-    observer.observe(wrapperRef.current);
+    observer.observe(target);
     return () => observer.disconnect();
   }, [startOnView]);
 
   return (
-    <div ref={wrapperRef} className={className}>
-      <Lottie
-        lottieRef={lottieRef}
-        animationData={animationData}
-        loop={false}
-        autoplay={false}
-        className="w-full"
-      />
+    <div
+      ref={wrapperRef}
+      className="w-full"
+      style={{
+        opacity: startOnView && !started ? 0 : 1,
+        transition: started ? "opacity 0.7s ease" : "none",
+      }}
+    >
+      <div className={className}>
+        <Lottie
+          lottieRef={lottieRef}
+          animationData={animationData}
+          loop={loopMode === "continuous"}
+          autoplay={false}
+          onComplete={loopMode !== "continuous" ? handleComplete : undefined}
+          className="w-full"
+        />
+      </div>
     </div>
   );
 }
