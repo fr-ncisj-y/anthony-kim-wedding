@@ -241,7 +241,10 @@ export default function Home() {
           </div>
 
           {/* Sentinel at bottom of section 2 — triggers flowers2 */}
-          <div ref={flowers2SentinelRef} className="absolute bottom-0 left-0 w-full h-px" />
+          <div
+            ref={flowers2SentinelRef}
+            className="absolute bottom-0 left-0 w-full h-px"
+          />
 
           <div className="pointer-events-none absolute top-0 right-0 z-10 w-[60%] translate-x-[24%] -translate-y-[56%] rotate-[15deg] opacity-80">
             <FloralLottie
