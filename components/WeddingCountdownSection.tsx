@@ -91,24 +91,102 @@ export default function WeddingCountdownSection() {
       <div className="wedding-particle-layer" aria-hidden="true">
         {(
           [
-            { x: '12%', y: '18%', size: '5px', color: 'rgba(255,255,255,0.75)', dur: '8s',   delay: '0.6s', anim: 'weddingParticleFloatRight' },
-            { x: '35%', y: '45%', size: '6px', color: 'rgba(220,235,245,0.80)', dur: '7s',   delay: '2s',   anim: 'weddingParticleFloatLeft'  },
-            { x: '58%', y: '28%', size: '5px', color: 'rgba(255,255,255,0.70)', dur: '9.5s', delay: '1s',   anim: 'weddingParticleFloatRight' },
-            { x: '80%', y: '60%', size: '6px', color: 'rgba(220,235,245,0.75)', dur: '6.5s', delay: '3s',   anim: 'weddingParticleFloatLeft'  },
-            { x: '22%', y: '72%', size: '5px', color: 'rgba(255,255,255,0.70)', dur: '10s',  delay: '4s',   anim: 'weddingParticleFloatRight' },
-            { x: '90%', y: '30%', size: '6px', color: 'rgba(220,235,245,0.80)', dur: '7.5s', delay: '1.5s', anim: 'weddingParticleFloatLeft'  },
-            { x: '48%', y: '82%', size: '5px', color: 'rgba(255,255,255,0.70)', dur: '8.5s', delay: '0.3s', anim: 'weddingParticleFloatRight' },
-            { x: '68%', y: '12%', size: '6px', color: 'rgba(220,235,245,0.75)', dur: '6s',   delay: '2.8s', anim: 'weddingParticleFloatLeft'  },
-          ] as Array<{ x: string; y: string; size: string; color: string; dur: string; delay: string; anim: string }>
+            {
+              x: "12%",
+              y: "18%",
+              size: "5px",
+              color: "rgba(255,255,255,0.75)",
+              dur: "8s",
+              delay: "0.6s",
+              anim: "weddingParticleFloatRight",
+            },
+            {
+              x: "35%",
+              y: "45%",
+              size: "6px",
+              color: "rgba(220,235,245,0.80)",
+              dur: "7s",
+              delay: "2s",
+              anim: "weddingParticleFloatLeft",
+            },
+            {
+              x: "58%",
+              y: "28%",
+              size: "5px",
+              color: "rgba(255,255,255,0.70)",
+              dur: "9.5s",
+              delay: "1s",
+              anim: "weddingParticleFloatRight",
+            },
+            {
+              x: "80%",
+              y: "60%",
+              size: "6px",
+              color: "rgba(220,235,245,0.75)",
+              dur: "6.5s",
+              delay: "3s",
+              anim: "weddingParticleFloatLeft",
+            },
+            {
+              x: "22%",
+              y: "72%",
+              size: "5px",
+              color: "rgba(255,255,255,0.70)",
+              dur: "10s",
+              delay: "4s",
+              anim: "weddingParticleFloatRight",
+            },
+            {
+              x: "90%",
+              y: "30%",
+              size: "6px",
+              color: "rgba(220,235,245,0.80)",
+              dur: "7.5s",
+              delay: "1.5s",
+              anim: "weddingParticleFloatLeft",
+            },
+            {
+              x: "48%",
+              y: "82%",
+              size: "5px",
+              color: "rgba(255,255,255,0.70)",
+              dur: "8.5s",
+              delay: "0.3s",
+              anim: "weddingParticleFloatRight",
+            },
+            {
+              x: "68%",
+              y: "12%",
+              size: "6px",
+              color: "rgba(220,235,245,0.75)",
+              dur: "6s",
+              delay: "2.8s",
+              anim: "weddingParticleFloatLeft",
+            },
+          ] as Array<{
+            x: string;
+            y: string;
+            size: string;
+            color: string;
+            dur: string;
+            delay: string;
+            anim: string;
+          }>
         ).map((p, i) => (
           <div
             key={i}
             className="wedding-particle"
-            style={{
-              '--p-x': p.x, '--p-y': p.y, '--p-size': p.size,
-              '--p-color': p.color, '--p-dur': p.dur, '--p-delay': p.delay,
-              '--p-anim': p.anim,
-            } as React.CSSProperties}
+            style={
+              {
+                "--p-x": p.x,
+                "--p-y": p.y,
+                "--p-size": p.size,
+                "--p-color": p.color,
+                "--p-dur": p.dur,
+                "--p-delay": p.delay,
+                "--p-anim": p.anim,
+              } as React.CSSProperties
+            }
           />
         ))}
       </div>
@@ -228,7 +306,6 @@ export default function WeddingCountdownSection() {
                 </a>
               </div>
             </div>
-
           </div>
         </div>
       </RevealItem>
