@@ -26,6 +26,26 @@ export default function LoadingScreen() {
   const pageReadyRef = useRef(false);
   const minTimeRef = useRef(0);
 
+  useEffect(() => {
+    const html = document.documentElement;
+    const body = document.body;
+    const prevHtmlOverflow = html.style.overflow;
+    const prevBodyOverflow = body.style.overflow;
+    const prevBodyOverscroll = body.style.overscrollBehavior;
+
+    if (!gone) {
+      html.style.overflow = "hidden";
+      body.style.overflow = "hidden";
+      body.style.overscrollBehavior = "none";
+    }
+
+    return () => {
+      html.style.overflow = prevHtmlOverflow;
+      body.style.overflow = prevBodyOverflow;
+      body.style.overscrollBehavior = prevBodyOverscroll;
+    };
+  }, [gone]);
+
   // Track when the page is actually ready
   useEffect(() => {
     const isVeryNarrow = window.matchMedia("(max-width: 360px)").matches;

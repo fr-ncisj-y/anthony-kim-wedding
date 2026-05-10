@@ -32,11 +32,11 @@ export default function Home() {
     <>
       <LoadingScreen />
 
-      <main className="flex min-h-dvh flex-col items-center bg-neutral-300">
+      <main className="flex min-h-svh flex-col items-center bg-neutral-300">
         <section
           ref={section1Ref}
           className="
-          relative flex min-h-dvh w-full flex-col items-center
+          relative flex min-h-svh w-full flex-col items-center
           overflow-hidden border border-[#C8B9A8] bg-[#9AAABB]
           px-3 pb-8 max-[360px]:px-2.5 sm:px-4 md:h-[844px] md:w-[390px] md:px-0 md:pb-0
           md:shadow-2xl
@@ -45,7 +45,7 @@ export default function Home() {
           {/* ── HERO PHOTO ── */}
           <div
             className="relative w-full"
-            style={{ height: "45dvh", minHeight: "212px" }}
+            style={{ height: "45svh", minHeight: "212px" }}
           >
             <KenBurnsHeroImage
               src="/images/prenup.jpeg"
@@ -158,7 +158,7 @@ export default function Home() {
         <section
           ref={section2Ref}
           className="
-          relative -mt-px flex min-h-dvh w-full flex-col items-center justify-center
+          relative -mt-px flex min-h-svh w-full flex-col items-center justify-center
           overflow-hidden border border-t-0 border-[#C8B9A8] bg-[#F5F0EB]
           px-5 py-14 text-center md:h-[844px] md:w-[390px] md:px-8 md:py-0
           md:shadow-2xl
