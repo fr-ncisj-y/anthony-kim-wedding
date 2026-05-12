@@ -301,7 +301,7 @@ export default function Home() {
             {/* Date & time */}
             <RevealItem delay={1150} className="-mt-1">
               <p className="font-[family-name:var(--font-cormorant)] text-[0.95rem] italic text-[#F5F0EB] max-[360px]:text-[0.88rem] md:text-base">
-                Saturday, May 28, 2026
+                Thursday, May 28, 2026
               </p>
               <p className="font-[family-name:var(--font-cormorant)] text-[0.82rem] tracking-wide text-[#D7E1EA] max-[360px]:text-[0.77rem] md:text-sm">
                 Nine o'Clock in the Morning
