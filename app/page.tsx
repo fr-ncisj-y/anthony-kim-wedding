@@ -232,11 +232,11 @@ export default function Home() {
 
           {/* ── HERO PHOTO ── */}
           <div
-            className="relative w-full"
+            className="relative -mx-3 w-[calc(100%+1.5rem)] max-[360px]:-mx-2.5 max-[360px]:w-[calc(100%+1.25rem)] sm:-mx-4 sm:w-[calc(100%+2rem)] md:mx-0 md:w-full"
             style={{ height: "45svh", minHeight: "212px" }}
           >
             <KenBurnsHeroImage
-              src="/images/prenup.jpeg"
+              src="/images/main.jpg"
               alt="Anthony & Kim"
               priority
               className="object-cover object-[center_2%] [mask-image:linear-gradient(to_bottom,black_0%,black_68%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_0%,black_68%,transparent_100%)]"
@@ -576,6 +576,60 @@ export default function Home() {
         </section>
 
         <WeddingCountdownSection />
+
+        <section
+          className="
+          relative -mt-px flex min-h-svh w-full flex-col items-center
+          overflow-hidden border border-t-0 border-[#C8B9A8] bg-[#EEF3F7]
+          px-5 pt-14 pb-0 text-center md:h-[844px] md:w-[390px] md:px-8 md:pt-16
+          md:shadow-2xl
+        "
+        >
+          <div className="relative z-20 flex w-full max-w-[324px] flex-col items-center gap-4">
+            <RevealItem delay={150}>
+              <p className="font-[family-name:var(--font-cormorant)] text-[11px] uppercase tracking-[0.22em] text-[#8FA1B0]">
+                With Love
+              </p>
+            </RevealItem>
+
+            <RevealItem delay={300}>
+              <h3 className="font-[family-name:var(--font-cormorant)] text-[clamp(1.55rem,6.4vw,2.02rem)] leading-tight text-[#3A5060]">
+                Your Presence Is Our Greatest Gift
+              </h3>
+            </RevealItem>
+
+            <RevealItem delay={450}>
+              <p className="font-[family-name:var(--font-cormorant)] text-[15px] leading-relaxed text-[#4B5F6D]">
+                As we begin this new chapter together, we would be deeply
+                honored to celebrate this joyful day with you.
+              </p>
+            </RevealItem>
+
+            <RevealItem delay={600}>
+              <Divider />
+            </RevealItem>
+
+            <p className="font-[family-name:var(--font-cormorant)] text-[1.08rem] uppercase tracking-[0.16em] text-[#4B6272]">
+              Thank You
+            </p>
+
+            <p className="font-[family-name:var(--font-cormorant)] text-[0.98rem] italic text-[#556D7D]">
+              With love, Anthony &amp; Kim
+            </p>
+          </div>
+
+          <div className="relative mt-auto h-[64svh] min-h-[250px] w-[calc(100%+2.5rem)] max-w-none overflow-hidden md:h-[48%] md:w-[calc(100%+4rem)]">
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: "url('/images/close.jpg')" }}
+              aria-label="Closing invitation image"
+              role="img"
+            />
+
+            <div className="absolute inset-x-0 top-0 h-[10%] bg-gradient-to-b from-[#EEF3F7] via-[rgba(238,243,247,0.72)] to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 h-[13.5rem] bg-gradient-to-t from-[rgba(17,24,31,0.34)] via-[rgba(17,24,31,0.12)] to-transparent md:h-[16.5rem]" />
+          </div>
+        </section>
       </main>
     </>
   );
